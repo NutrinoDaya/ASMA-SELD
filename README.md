@@ -1,8 +1,17 @@
-# ASMA-SLED: Advanced Sound Localization and Detection
+# ASMA-SELD: Advanced Sound Localization and Detection
 
-**Professional implementation of Advanced Spatial-aware Multi-modal Attention for Sound Event Localization and Detection (ASMA-SLED)**
+**Professional implementation of Advanced Spatial-aware Multi-modal Attention for Sound Event Localization and Detection (ASMA-SELD)**
 
-This repository contains the production-ready implementation of our ASMA-SLED model, developed for the DCASE 2025 Challenge Task 3. The system achieves state-of-the-art performance in sound event localization and detection using multimodal audio-visual fusion.
+[![GitHub](https://img.shields.io/badge/GitHub-NutrinoDaya/ASMA--SELD-blue?logo=github)](https://github.com/NutrinoDaya/ASMA-SELD)
+[![Hugging Face](https://img.shields.io/badge/🤗%20Hugging%20Face-Model-yellow)](https://huggingface.co/NutrinoDaya/ASMA-SELD)
+[![Paper](https://img.shields.io/badge/Paper-Zenodo-green)](https://zenodo.org/records/17567932)
+
+This repository contains the production-ready implementation of our ASMA-SELD model, developed for the DCASE 2025 Challenge Task 3. The system achieves state-of-the-art performance in sound event localization and detection using multimodal audio-visual fusion.
+
+**🔗 Links:**
+- **GitHub Repository**: [https://github.com/NutrinoDaya/ASMA-SELD](https://github.com/NutrinoDaya/ASMA-SELD)
+- **Pre-trained Model**: [https://huggingface.co/NutrinoDaya/ASMA-SELD](https://huggingface.co/NutrinoDaya/ASMA-SELD)
+- **Published Paper**: [https://zenodo.org/records/17567932](https://zenodo.org/records/17567932)
 
 ## Table of Contents
 

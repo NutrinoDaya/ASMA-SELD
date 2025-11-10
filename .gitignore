@@ -66,6 +66,7 @@ DCASE2025_SELD_dataset/
 *.synctex.gz
 *.fdb_latexmk
 *.fls
+*.pdf
 
 # System files
 Thumbs.db
