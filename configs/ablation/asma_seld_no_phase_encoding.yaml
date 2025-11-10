@@ -1,0 +1,80 @@
+# ASMA-SLED Without Phase Encoding - Ablation Study
+# Tests impact of phase encoding component on model performance
+
+# Model Configuration
+net_type: 'asma_sled_ablation'
+modality: 'audio_visual'
+
+# Dataset Configuration
+dataset_name: 'DCASE2025_SELD'
+dataset_dir: 'DCASE2025_SELD_dataset'
+
+# Audio Configuration
+fs: 24000
+hop_len: 480
+label_hop_len_s: 0.1
+max_audio_len_s: 60
+nb_mel_bins: 64
+
+# Video Configuration  
+max_frames: 600
+frame_res: [224, 224]
+
+# Feature Configuration
+audio_feature: 'mel'
+nb_input_channels: 4
+use_salsalite: false
+
+# Model Architecture
+rnn_size: [128, 128]
+fc_size: [128]
+dropout_rate: 0.3
+nb_cnn2d_filt: 64
+f_pool_size: [4, 2, 2]
+t_pool_size: [1, 1, 2]
+nb_rnn_layers: 2
+nb_self_attn_layers: 0
+
+# ASMA-SLED Ablation Configuration
+ablation:
+  enable_phase_encoding: false  # DISABLED for ablation
+  enable_se_blocks: true
+  enable_transformer_fusion: true
+  use_multimodal_attention: true
+
+# Training Configuration
+batch_size: 8
+nb_epochs: 150
+learning_rate: 0.001
+weight_decay: 0.0001
+
+# Loss Configuration
+loss_type: 'ADPIT'
+multiACCDOA: true
+use_amp: true
+
+# Data Augmentation
+enable_augmentation: false  # As specified: no data augmentation
+
+# Evaluation
+eval_epochs: [50, 100, 150]
+save_frequency: 25
+
+# Development Splits
+dev_train_folds: [1, 2, 3, 4]
+dev_test_folds: [5, 6]
+
+# Output Configuration
+nb_classes: 13
+doa_format: 'accdoa'
+label_sequence_len: 600
+
+# Worker Configuration
+nb_workers: 2
+shuffle: true
+
+# Metrics Configuration
+use_jackknife: true
+average: 'macro'
+segment_based_metrics: false
+lad_doa_thresh: 20

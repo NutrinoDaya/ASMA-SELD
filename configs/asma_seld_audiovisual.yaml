@@ -1,0 +1,90 @@
+# ASMA-SELD Audio-Visual Configuration
+# Advanced Spatial-aware Multi-modal Attention for Sound Event Localization and Detection
+# F-score champion (21.5%) with multimodal audio-visual fusion
+
+# Task configuration
+modality: audio_visual  # 'audio' or 'audio_visual'
+net_type: asma_seld_ablation
+model_type: asma_seld_audiovisual
+
+# Data paths
+root_dir: ./DCASE2025_SELD_dataset
+feat_dir: ./DCASE2025_SELD_dataset/features
+log_dir: logs
+checkpoints_dir: checkpoints
+output_dir: outputs
+
+# Audio feature extraction
+audio:
+  sampling_rate: 24000
+  hop_length_s: 0.02
+  nb_mels: 64
+
+# Video feature extraction  
+video:
+  fps: 10
+  resnet_feature_size: 49  # 7x7 feature map from ResNet
+
+# Model architecture
+model:
+  # Convolutional layers
+  nb_conv_blocks: 3
+  nb_conv_filters: 64
+  f_pool_size: [4, 4, 2]
+  t_pool_size: [5, 1, 1]
+  dropout: 0.05
+  
+  # Recurrent layers
+  rnn_size: 128
+  nb_rnn_layers: 2
+  
+  # Attention layers
+  nb_self_attn_layers: 2
+  nb_attn_heads: 8
+  
+  # Transformer fusion (audio visual only)
+  nb_transformer_layers: 2
+  
+  # Feed forward layers
+  nb_fnn_layers: 1
+  fnn_size: 128
+
+# Multi-track configuration
+max_polyphony: 3  # Number of simultaneous tracks
+nb_classes: 13
+label_sequence_length: 50  # 5 seconds at 10Hz
+
+# Loss configuration
+loss:
+  multiACCDOA: true  # Multi-track ACCDOA format
+  thresh_unify: 15
+
+# Training configuration
+training:
+  nb_epochs: 200
+  batch_size: 256  # Large batch size for RTX 4090
+  nb_workers: 8  # Use multiple workers
+  shuffle: true
+  eval_epochs: [1, 150, 200]  # Validate at epoch 1 for testing, then 150 and 200
+  eval_frequency: 9999  # Disable regular validation
+  save_frequency: 50
+
+# Optimizer configuration
+optimizer:
+  learning_rate: 0.001
+  weight_decay: 0
+
+# Data folds
+data:
+  dev_train_folds: ['fold2', 'fold3']  # Real data only, no synthetic fold1
+  dev_test_folds: ['fold4']
+
+# Evaluation metrics
+metrics:
+  average: macro  # 'micro' or 'macro'
+  segment_based_metrics: false
+  lad_doa_thresh: 20
+  lad_dist_thresh: .inf
+  lad_reldist_thresh: 1.0
+  lad_req_onscreen: false
+  use_jackknife: false
