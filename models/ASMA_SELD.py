@@ -11,7 +11,7 @@ Key Features:
 3. Spatial awareness for enhanced localization accuracy
 4. Multi-track prediction with onscreen/offscreen classification
 
-Author: ASMA-SLED Research Team
+Author: Mohammad Dayarneh
 Date: November 9, 2025
 """
 
