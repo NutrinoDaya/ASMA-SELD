@@ -4,14 +4,14 @@
 
 [![GitHub](https://img.shields.io/badge/GitHub-NutrinoDaya/ASMA--SELD-blue?logo=github)](https://github.com/NutrinoDaya/ASMA-SELD)
 [![Hugging Face](https://img.shields.io/badge/🤗%20Hugging%20Face-Model-yellow)](https://huggingface.co/NutrinoDaya/ASMA-SELD)
-[![Paper](https://img.shields.io/badge/Paper-Zenodo-green)](https://zenodo.org/records/17567932)
+[![Paper](https://img.shields.io/badge/Paper-Zenodo-green)](https://zenodo.org/records/17567932?token=eyJhbGciOiJIUzUxMiJ9.eyJpZCI6ImRhZjc4MTE5LWZlYjktNDgxYi05MThkLTI5NWVkYmNhZjAyYiIsImRhdGEiOnt9LCJyYW5kb20iOiIzNWZjMThhMWI1ZGI0MzMwMmM1ZDljMzA2ZWFjMDJiNSJ9.GRODFdCPgth4rdzJwbLLXSwZ-fU2NuCSt6r5YS0jVpuiinX2NghVK9jrEhUqDv1wp3FX-2qu3g79lHyMVIhSDQ)
 
 This repository contains the production-ready implementation of our ASMA-SELD model, developed for the DCASE 2025 Challenge Task 3. The system achieves state-of-the-art performance in sound event localization and detection using multimodal audio-visual fusion.
 
 **🔗 Links:**
 - **GitHub Repository**: [https://github.com/NutrinoDaya/ASMA-SELD](https://github.com/NutrinoDaya/ASMA-SELD)
 - **Pre-trained Model**: [https://huggingface.co/NutrinoDaya/ASMA-SELD](https://huggingface.co/NutrinoDaya/ASMA-SELD)
-- **Published Paper**: [https://zenodo.org/records/17567932](https://zenodo.org/records/17567932)
+- **Published Paper**: [https://zenodo.org/records/17567932?token=eyJhbGciOiJIUzUxMiJ9.eyJpZCI6ImRhZjc4MTE5LWZlYjktNDgxYi05MThkLTI5NWVkYmNhZjAyYiIsImRhdGEiOnt9LCJyYW5kb20iOiIzNWZjMThhMWI1ZGI0MzMwMmM1ZDljMzA2ZWFjMDJiNSJ9.GRODFdCPgth4rdzJwbLLXSwZ-fU2NuCSt6r5YS0jVpuiinX2NghVK9jrEhUqDv1wp3FX-2qu3g79lHyMVIhSDQ](https://zenodo.org/records/17567932?token=eyJhbGciOiJIUzUxMiJ9.eyJpZCI6ImRhZjc4MTE5LWZlYjktNDgxYi05MThkLTI5NWVkYmNhZjAyYiIsImRhdGEiOnt9LCJyYW5kb20iOiIzNWZjMThhMWI1ZGI0MzMwMmM1ZDljMzA2ZWFjMDJiNSJ9.GRODFdCPgth4rdzJwbLLXSwZ-fU2NuCSt6r5YS0jVpuiinX2NghVK9jrEhUqDv1wp3FX-2qu3g79lHyMVIhSDQ)
 
 ## Table of Contents
 
@@ -50,19 +50,25 @@ ASMA-SLED is an advanced neural architecture for simultaneous sound event locali
 
 ### Technical Specifications
 - **Input**: 4-channel audio (24kHz) + synchronized video (25fps, 224×224)
-- **Output**: 13-class sound events with 3D localization (F-score: 21.5%, DOA error: 22.5°)
+- **Output**: 13-class sound events with 3D localization (F-score: 21.5%, DOA error: 22.5°, Distance error: 87.0)
 - **Architecture**: CNN-RNN hybrid with transformer-based multimodal fusion
 - **Training**: End-to-end optimization with ADPIT loss function
 
 ## Performance
 
-| Model Variant | F-score | DOA Error | Distance Error |
-|---------------|---------|-----------|----------------|
-| **ASMA-SLED (Full)** | **21.5%** | **22.5°** | **18.3m** |
-| ASMA-SLED (No Phase) | 19.2% | 25.1° | 20.7m |
-| ASMA-SLED (No SE) | 20.1% | 23.8° | 19.5m |
-| ASMA-SLED (No Transformer) | 18.7% | 26.4° | 22.1m |
-| Baseline Audio-only | 16.8% | 28.2° | 24.6m |
+| Model Variant | F-score | DOA Error | Distance Error | Params |
+|---------------|---------|-----------|----------------|--------|
+| **ASMA-SELD** | **21.5%** | **22.5°** | **87.0** | 2.72M |
+| Baseline AV | 20.5% | 27.2° | 86.3 | 2.72M |
+
+### Ablation Study Results (200 Epochs)
+
+| Variant | F-score | DOA Error | Distance Error | Params |
+|---------|---------|-----------|----------------|--------|
+| **Full ASMA-SELD** | **21.5%** | **22.5°** | **87.0** | 2720K |
+| No Phase Encoding | 19.9% | 24.4° | 67.9 | 2720K |
+| No SE Blocks | 18.2% | 26.7° | 63.9 | 2720K |
+| No Transformer | 18.9% | 21.3° | 131.4 | 784K |
 
 ## Installation
 
@@ -96,7 +102,7 @@ pip install torch torchvision torchaudio --index-url https://download.pytorch.or
 
 🤗 **Hugging Face**: [https://huggingface.co/NutrinoDaya/ASMA-SELD](https://huggingface.co/NutrinoDaya/ASMA-SELD/upload/main)
 
-The checkpoint includes the trained ASMA-SELD model achieving 21.5% F-score on the DCASE 2025 Task 3 development set.
+The checkpoint includes the trained ASMA-SELD model achieving 21.5% F-score (22.5° DOA error, 87.0 distance error) on the DCASE 2025 Task 3 development set, representing a 1.0% improvement over the baseline audio-visual model.
 
 ### 2. Dataset Preparation
 ```bash
